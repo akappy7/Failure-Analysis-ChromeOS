@@ -12,14 +12,14 @@ using namespace std;
 void ConvertToBinary(int n);
 void parseLine(string s);
 void errorPrint(string s);
-void manchester(string digit);
+void manchester(const char digit);
 string fillString(string s);
 
 string binary="";//global
 unsigned int lengthMessage;
 
 int main(int argc, char *argv[]){
-	//ConvertToBinary(MAX);
+	ConvertToBinary(MAX);
 	lengthMessage=(binary.length());
 
 	if(argc == 1){
@@ -52,13 +52,19 @@ void parseLine(string s){
 	string localBinary = binary;
 	localBinary = fillString(localBinary);
 	for(unsigned int x = 0; x < lengthMessage; x++){
-		cout<<localBinary[x]<<flush;
+		manchester(localBinary[x]);
+		//cout<<localBinary[x]<<flush;
 		usleep(FREQ);
 	}
 }//convert to binary
 
-void manchester(string digit){
-
+void manchester(const char digit){
+ 	if(digit == '0'){
+ 		cout<<",|'"<<flush;
+ 	}//rising edge for 0
+ 	if(digit == '1'){
+ 		cout<<"'|,"<<flush;
+ 	}//falling edge for 1
 }
 
 string fillString(string s){
