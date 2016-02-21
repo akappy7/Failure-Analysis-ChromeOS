@@ -12,13 +12,14 @@ using namespace std;
 void ConvertToBinary(int n);
 void parseLine(string s);
 void errorPrint(string s);
+void manchester(string digit);
 string fillString(string s);
 
 string binary="";//global
 unsigned int lengthMessage;
 
 int main(int argc, char *argv[]){
-	ConvertToBinary(MAX);
+	//ConvertToBinary(MAX);
 	lengthMessage=(binary.length());
 
 	if(argc == 1){
@@ -55,6 +56,10 @@ void parseLine(string s){
 		usleep(FREQ);
 	}
 }//convert to binary
+
+void manchester(string digit){
+
+}
 
 string fillString(string s){
 	unsigned int l = s.length();
