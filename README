@@ -1,0 +1,6 @@
+This is a encoding of Manchster to be used for board communication.
+
+To run. 
+
+Enter "Make"
+and ./test [file name]

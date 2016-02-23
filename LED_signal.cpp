@@ -6,6 +6,7 @@
 
 #define FREQ 1000000 //frequancy of the message in microseconds *1 second = 1000000 microseconds
 #define MAX 15
+#define SYNC 5
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void ConvertToBinary(int n);
 void parseLine(string s);
 void errorPrint(string s);
 void manchester(const char digit);
+void syncronization();
 string fillString(string s);
 
 string binary="";//global
@@ -28,15 +30,20 @@ int main(int argc, char *argv[]){
 	
 	string line;
 	ifstream myfile (argv[1]);//openfile
-
+	bool flag =1;
   	if (myfile.is_open()){
   		while(getline (myfile,line, ' ')){
   			if(line[line.length()-1] =='\n'){
   				line.erase(line.length()-1);
   			}//remove newline
+  			if(flag == 1){
+  				flag = 0;
+  				syncronization();
+  			}
   			parseLine(line);
   		}//all the file
   		myfile.close();
+  		syncronization();
   	}//read file
   	else{
   		errorPrint("File cannot be open");
@@ -90,3 +97,11 @@ void errorPrint(string s){
 	cerr<<"Error<<"<< s << ">>"<<endl;
 	exit(1);
 }//print error and exit
+
+void syncronization(){
+	for(int i = 0; i < SYNC; i++){
+		cout<<"'"<<flush;
+		usleep(FREQ);
+	}
+
+}
